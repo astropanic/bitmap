@@ -1,0 +1,4 @@
+bitmap
+======
+
+Bitmap related algoritms
