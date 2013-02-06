@@ -5,6 +5,9 @@ var Bitmap = function (map) {
     return true;
   },
   this.neighbours = function(x, y) {
+    tmp = x;
+    x = y;
+    y = tmp;
     cells = new Array();
     for(yy = y-1; yy <= y+1; yy ++){
       for(xx = x-1; xx <= x+1; xx ++){
