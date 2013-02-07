@@ -1,6 +1,9 @@
 var Bitmap = function (map) {
-  this.map  = map;
-  this.size = map[0].length,
+  this._map = map,
+  this.map = function(x, y){
+    return this._map[x][y];
+  },
+  this.size = this._map[0].length,
   this.closedPath = function(){
     return true;
   },
@@ -12,7 +15,7 @@ var Bitmap = function (map) {
     for(yy = y-1; yy <= y+1; yy ++){
       for(xx = x-1; xx <= x+1; xx ++){
         if(xx>=0 && xx <= this.size && yy>=0 && yy <= this.size && (xx != x || yy != y)){
-          cells.push(this.map[xx][yy]);
+          cells.push(this.map(xx, yy));
         }
       }
     }
