@@ -5,4 +5,38 @@
     <canvas id="map"></canvas>
   </body>
   <script type="text/javascript" src="src/bitmap.js"></script>
+  <script type="text/javascript">
+    var canvas = document.getElementById("map");
+    var map = [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,0,0,1,1,1,1,1,0,1,0,0,0,0,1],
+      [1,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1],
+      [1,0,0,0,1,0,1,0,1,0,1,0,0,0,0,1],
+      [1,0,0,0,1,1,1,0,1,0,1,0,1,1,1,1],
+      [1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    ];
+
+    var width  = map[0].length
+    var height = map.length
+    var size   = 48;
+    var cwidth  = width * size;
+    var cheight = height * size;
+    canvas.width =  cwidth;
+    canvas.height= cheight;
+    var ctx  = canvas.getContext("2d");
+    ctx.fillStyle = "Black";
+    ctx.fillRect(0,0,cwidth,cheight);
+    for(y = 0; y < height ; y++){
+      for(x = 0; x < width; x++){
+        if(map[y][x] == 1){
+          ctx.fillStyle = "Black";
+        } else {
+          ctx.fillStyle = "Red";
+        }
+        ctx.fillRect(x*size,y*size,size-2,size-2);
+      }
+    }
+  </script>
 </html>
