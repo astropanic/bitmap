@@ -38,5 +38,28 @@
         ctx.fillRect(x*size,y*size,size-2,size-2);
       }
     }
+    ctx.fillStyle = "Green";
+    var bitmap = new Bitmap(map);
+    var queue = [];
+    var params = null;
+    queue.push([1,1]);
+    while(queue.length > 0){
+      console.log(queue.length);
+      params = queue.shift();
+      console.log(queue.length);
+      var red = bitmap.connected(params[0],params[1]);
+      var s = red.length;
+      for(i = 0; i < s; i++){
+        c = red[i];
+        x = c.x;
+        y = c.y;
+        v = c.value;
+        if(v == 0){
+          ctx.fillRect(x*size,y*size,size-2,size-2);
+          //queue.push([x,y]);
+        }
+      }
+
+    }
   </script>
 </html>

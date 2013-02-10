@@ -15,10 +15,14 @@ var Bitmap = function (map) {
     for(yy = y-1; yy <= y+1; yy ++){
       for(xx = x-1; xx <= x+1; xx ++){
         if(xx>=0 && xx <= this.size && yy>=0 && yy <= this.size && (xx != x || yy != y)){
-          cells.push(this.map(xx, yy));
+          cells.push( {x: xx, y: yy, value: this.map(xx, yy) });
         }
       }
     }
     return cells;
+  },
+
+  this.connected = function(x, y){
+    return this.neighbours(x, y);
   }
 };
