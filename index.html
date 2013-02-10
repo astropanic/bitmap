@@ -44,9 +44,7 @@
     var params = null;
     queue.push([1,1]);
     while(queue.length > 0){
-      console.log(queue.length);
       params = queue.shift();
-      console.log(queue.length);
       var red = bitmap.connected(params[0],params[1]);
       var s = red.length;
       for(i = 0; i < s; i++){
@@ -55,11 +53,11 @@
         y = c.y;
         v = c.value;
         if(v == 0){
-          ctx.fillRect(x*size,y*size,size-2,size-2);
-          //queue.push([x,y]);
+          ctx.fillRect(y*size,x*size,size-2,size-2);
+          bitmap._map[x][y] = 3;
+          queue.push([x,y]);
         }
       }
-
     }
   </script>
 </html>
