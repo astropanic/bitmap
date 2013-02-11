@@ -3,61 +3,64 @@
   </head>
   <body>
     <canvas id="map"></canvas>
+    <div id="panel" style="float: right;"> </div>
   </body>
   <script type="text/javascript" src="src/bitmap.js"></script>
   <script type="text/javascript">
     var canvas = document.getElementById("map");
-    var map = [
-      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-      [1,0,0,0,1,1,1,1,1,0,1,0,0,0,0,1],
-      [1,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1],
-      [1,0,0,0,1,0,1,0,1,0,1,0,0,0,0,1],
-      [1,0,0,0,1,1,1,0,1,0,1,0,1,1,1,1],
-      [1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1],
-      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    ];
-
-    var width  = map[0].length
-    var height = map.length
-    var size   = 48;
+    var colors = [];
+    var width  = 32;
+    var height = 16;
+    var size   = 24;
     var cwidth  = width * size;
     var cheight = height * size;
     canvas.width =  cwidth;
     canvas.height= cheight;
     var ctx  = canvas.getContext("2d");
-    ctx.fillStyle = "Black";
-    ctx.fillRect(0,0,cwidth,cheight);
+    colors.push('red');
+    colors.push('green');
+    colors.push('blue');
+    colors.push('yellow');
+    colors.push('black');
+    colors.push('gray');
+    colors.push('purple');
+    colors.push('orange');
+
+    var panel = document.getElementById("panel");
+    for(var i = 0; i< colors.length; i++){
+      var div = document.createElement('div');
+      div.style.backgroundColor = colors[i];
+      div.style.width="24px";
+      div.style.height="24px";
+      div.onclick = function(){
+        ctx.fillStyle = this.style.backgroundColor;
+        ctx.fillRect(0*size,0*size,size,size);
+      };
+      panel.appendChild(div);
+    }
+
+    var rndcol = function(){
+      return colors[Math.floor(Math.random()*colors.length)];
+    };
+
+    var map    = new Array(width);
+    for(var i = 0; i < width; i++){
+      map[i] = new Array(height);
+    };
+
+    for(var y = 0; y < height ; y++){
+      for(var x = 0; x < width ; x++){
+        map[x][y] = {color: rndcol()};
+      }
+    }
+
     for(y = 0; y < height ; y++){
       for(x = 0; x < width; x++){
-        if(map[y][x] == 1){
-          ctx.fillStyle = "Black";
-        } else {
-          ctx.fillStyle = "Red";
-        }
-        ctx.fillRect(x*size,y*size,size-2,size-2);
+        ctx.fillStyle = map[x][y].color;
+        ctx.fillRect(x*size,y*size,size,size);
       }
     }
-    ctx.fillStyle = "Green";
-    var bitmap = new Bitmap(map);
-    var queue = [];
-    var params = null;
-    queue.push([1,1]);
-    while(queue.length > 0){
-      params = queue.shift();
-      var red = bitmap.connected(params[0],params[1]);
-      var s = red.length;
-      for(i = 0; i < s; i++){
-        c = red[i];
-        x = c.x;
-        y = c.y;
-        v = c.value;
-        if(v == 0){
-          ctx.fillRect(y*size,x*size,size-2,size-2);
-          bitmap._map[x][y] = 3;
-          queue.push([x,y]);
-        }
-      }
-    }
+
   </script>
+
 </html>
