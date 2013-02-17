@@ -17,5 +17,6 @@ Player.prototype.colorize = function(color, game) {
 };
 
 Player.prototype.fill = function(color, game){
+  var cells = [];
   this.colorize(color, game);
 };
