@@ -17,6 +17,22 @@ Player.prototype.colorize = function(color, game) {
 };
 
 Player.prototype.fill = function(color, game){
-  var cells = [];
   this.colorize(color, game);
+  this.tiles = [];
+  for(var i = 0; i < this.cells.length; i++){
+    var cell = this.cells[i];
+    var x    = cell[0];
+    var y    = cell[1];
+    for(var yy = y-1; yy <= y+1 ; yy++){
+      if((yy < 0) || (yy > game.height-1)){
+        continue;
+      }
+      for(var xx = x-1; xx <= x+1 ; xx++){
+        if((xx < 0) || (xx > game.width-1)){
+          continue;
+        }
+        this.tiles.push([xx, yy]);
+      }
+    }
+  }
 };

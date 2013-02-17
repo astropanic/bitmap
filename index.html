@@ -23,7 +23,7 @@
     canvas.height= cheight;
     var ctx    = canvas.getContext("2d");
 
-    var game = new Game(32, 16, 24);
+    var game = new Game(width, height, size);
 
     var player = new Player(0,0);
     player.fill('yellow', game);
@@ -34,7 +34,7 @@
 
     for(var y = 0; y < height ; y++){
       for(var x = 0; x < width ; x++){
-       game.map[x][y] = {color: rndcol()};
+        game.map[x][y] = {color: rndcol()};
       }
     }
 
