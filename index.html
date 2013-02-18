@@ -5,7 +5,7 @@
     <canvas id="map"></canvas>
     <div id="panel" style="float: right;"> </div>
   </body>
-  <script type="text/javascript" src="lib/underscore.js"></script>
+  <script type="text/javascript" src="lib/underscore-min.js"></script>
   <script type="text/javascript" src="src/bitmap.js"></script>
   <script type="text/javascript" src="src/game.js"></script>
   <script type="text/javascript" src="src/player.js"></script>
@@ -13,7 +13,7 @@
 
 
     var canvas = document.getElementById("map");
-    var colors = ['red', 'green', 'blue', 'yellow', 'black', 'gray', 'purple'];
+    var colors = ['red', 'green', 'blue', 'yellow', 'gray', 'purple', 'black'];
     var width  = 32;
     var height = 16;
     var size   = 24;
@@ -26,7 +26,6 @@
     var game = new Game(width, height, size);
 
     var player = new Player(0,0);
-    player.fill('yellow', game);
 
     var rndcol = function(){
       return colors[Math.floor(Math.random()*colors.length)];
@@ -50,7 +49,9 @@
       div.style.width="24px";
       div.style.height="24px";
       div.onclick = function(){
-        player.fill(div.style.backgroundColor, game);
+        var clr = window.getComputedStyle(this).getPropertyValue('background-color');
+        player.fill(clr, game);
+        console.log(player);
       };
       panel.appendChild(div);
     }
