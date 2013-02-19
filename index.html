@@ -45,11 +45,12 @@
     var panel = document.getElementById("panel");
     for(var i = 0; i< colors.length; i++){
       var div = document.createElement('div');
+      div.setAttribute("data-color", colors[i]);
       div.style.backgroundColor = colors[i];
       div.style.width="24px";
       div.style.height="24px";
       div.onclick = function(){
-        var clr = window.getComputedStyle(this).getPropertyValue('background-color');
+        var clr = this.getAttribute("data-color");
         player.fill(clr, game);
         console.log(player);
       };
