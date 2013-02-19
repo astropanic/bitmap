@@ -13,7 +13,7 @@
 
 
     var canvas = document.getElementById("map");
-    var colors = ['red', 'green', 'blue', 'yellow', 'gray', 'purple', 'black'];
+    var colors = ['red', 'green', 'blue', 'yellow'];
     var width  = 32;
     var height = 16;
     var size   = 24;
@@ -36,11 +36,6 @@
         game.map[x][y] = {color: rndcol()};
       }
     }
-
-    game.map[0][0] = {color: 'black'};
-    game.map[0][1] = {color: 'black'};
-    game.map[1][0] = {color: 'black'};
-    game.map[1][1] = {color: 'black'};
 
     var panel = document.getElementById("panel");
     for(var i = 0; i< colors.length; i++){

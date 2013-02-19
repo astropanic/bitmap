@@ -22,7 +22,7 @@ Player.prototype.colorize = function(color, game) {
     var y    = cell.y;
     game.map[x][y].color = color;
     ctx.fillStyle = game.map[x][y].color;
-    ctx.fillRect(x*size+4,y*size+4,size-10,size-10);
+    ctx.fillRect(x*size,y*size,size-2,size-2);
   };
 };
 
@@ -33,6 +33,7 @@ Player.prototype.fill = function(color, game){
 
   while(this.tiles.length > 0){
     var cell = this.tiles.shift();
+    this.tmp.push(cell);
     var x = cell.x;
     var y = cell.y;
 
@@ -53,7 +54,7 @@ Player.prototype.fill = function(color, game){
         else {
           if(x == xx || y == yy){
             this.tiles.push({x:xx, y:yy});
-            this.tmp.push([xx, yy]);
+            this.tmp.push({x:xx, y:yy});
             game.map[xx][yy].marked = true;
           }
         }
@@ -63,9 +64,9 @@ Player.prototype.fill = function(color, game){
   this.cells = this.tmp;
   for(var i = 0; i < this.tmp.length; i++){
     var cell = this.tmp[i];
-    var x    = cell[0];
-    var y    = cell[1];
-    game.map[x][y].color = "white";
+    var x    = cell.x;
+    var y    = cell.y;
+    game.map[x][y].color = color;
     ctx.fillStyle = game.map[x][y].color;
     ctx.fillRect(x*size+4,y*size+4,size-10,size-10);
   };
